@@ -18,6 +18,10 @@ apps.use(
 apps.use(cors());
 apps.use(express.static('public'));
 
+apps.get('/', (req, res) => {
+    res.status(200).json({ "success": true })
+})
+
 apps.get('/login', (req, res) => {
     res.sendFile(path.resolve('./views/login.html'));
 })
