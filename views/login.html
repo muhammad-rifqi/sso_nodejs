@@ -156,6 +156,7 @@
             <h2>Welcome</h2>
             <h3>Login</h3>
             <form class="sign-in-form" action="/act_login" method="post">
+                <input type="hidden" id="urls" name="url" value="">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
                     <input type="text" placeholder="Email" name="email" id="email">
@@ -168,9 +169,13 @@
                 <button id="loginBtn" type="submit">Login</button>
             </form>
         </div>
-       
+
     </div>
 
 </body>
+<script>
+    const uri = new URL(window.location.href);
+    document.getElementById("urls").value = uri?.searchParams.get('from');
+</script>
 
 </html>

@@ -5,29 +5,21 @@ const { executeQuery } = require('./config');
 
 const do_login = async (req, res) => {
     const email = req?.body?.email;
+    const uri = req.body.url;
     const password = md5(req?.body?.password);
     const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ? ', [email, password])
     if (sql?.length > 0) {
         const isLogin = true;
         res.cookie("islogin", isLogin , {
-            expires: new Date(Date.now() + 86400000 * 24), 
-            path: '/',
-            secure: true, 
-            httpOnly: true 
+            expires: new Date(Date.now() + 86400000 * 24)
         });
         res.cookie("id", sql[0]?.id, {
-            expires: new Date(Date.now() + 86400000 * 24), 
-            path: '/',
-            secure: true, 
-            httpOnly: true 
+            expires: new Date(Date.now() + 86400000 * 24)
         });
         res.cookie("name", sql[0]?.name, {
-            expires: new Date(Date.now() + 86400000 * 24), 
-            path: '/',
-            secure: true, 
-            httpOnly: true 
+            expires: new Date(Date.now() + 86400000 * 24)
         });
-        res.status(200).json({ "success": true , "data" : sql })
+        res.redirect(uri+'/dashboard');
     } else {
         res.status(200).json({ "success": false })
     }
@@ -38,13 +30,13 @@ const do_logout = (req, res) => {
     res.clearCookie("islogin");
     res.clearCookie("name");
     res.clearCookie("id");
-    res.status(200).json({ "success": true })
+    res.redirect('http://localhost:3005/login');
 }
 
 
 const user_register = async (req, res) => {
     const passwords = md5(req?.body?.password);
-     const sql = await executeQuery("insert into users(username,email,password) values(?,?,?)",
+     const sql = await executeQuery("insert into users(name,email,password) values(?,?,?)",
         [req.body.username, req.body.email, passwords]);
     if (sql) {
         res.status(200).json({ "success": true})
