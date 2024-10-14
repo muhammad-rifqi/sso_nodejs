@@ -30,6 +30,9 @@ apps.get('/register', (req, res) => {
     res.sendFile(path.resolve('./views/register.html'));
 })
 
+
+apps.post('/insertusers', db.user_register);
+
 apps.post('/act_login', db.do_login);
 
 apps.get("/logout", db.do_logout);

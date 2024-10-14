@@ -1,198 +1,183 @@
-<!doctype html>
-
-<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact" dir="ltr"
-    data-theme="theme-default" data-/assets-path="/assets/" data-template="vertical-menu-template-no-customizer"
-    data-style="light">
+<html>
 
 <head>
-    <script src="/layout/meta.js"></script>
-
+    <title>SSO REGISTER</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        div.dt-top-container {
-            display: grid;
-            grid-template-columns: auto auto auto;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #e0f7e9, #a8e6cf);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url('assets/img/background.png');
+            /* added this line */
+            background-size: cover;
+            /* added this line */
+            background-position: center;
+            /* added this line */
         }
 
-        div.dt-center-in-div {
-            margin: 0 auto;
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 80%;
         }
 
-        div.dt-filter-spacer {
-            margin: 10px 0;
+        .title {
+            font-size: 3em;
+            color: #1a73e8;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            line-height: 49px;
+            margin: 0 0 20px;
+            color: #146AA4;
+        }
+
+        .login-box h3 {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 17px;
+            margin: 0 0 20px;
+            color: #146AA4;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px 10px 10px 40px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            background-color: #EEF5FF;
+            /* added this line */
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #1a73e8;
+            font-size: 1.2em;
+        }
+
+        .login-box button {
+            width: 180px;
+            height: 40px;
+            top: 393px;
+            left: 166.5px;
+            gap: 0px;
+            border-radius: 10px 0px 0px 0px;
+            opacity: 0px;
+
+            background: #146AA4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .login-box a {
+            display: block;
+            margin-top: 10px;
+            color: #146AA4;
+            text-decoration: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
-
 </head>
 
 <body>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-        <div class="layout-container">
-            <!-- Menu -->
-            <script src="/layout/nav.js"></script>
-
-            <!-- / Menu -->
-
-            <!-- Layout container -->
-            <div class="layout-page">
-                <!-- Navbar -->
-
-                <script src="/layout/nav2.js"></script>
-
-                <!-- / Navbar -->
-
-                <!-- Content wrapper -->
-                <div class="content-wrapper">
-                    <!-- Content -->
-
-                    <div class="container-xxl flex-grow-1 container-p-y">
-                        <!-- DataTable with Buttons -->
-                        <div class="card">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <form action="/insertnews" method="post" enctype="multipart/form-data">
-                                        <div class="card stretch stretch-full">
-                                            <div class="card-body lead-status">
-                                                <div class="mb-5 d-flex align-items-center justify-content-between">
-                                                    <h5 class="fw-bold mb-0 me-4">
-                                                        <span class="d-block mb-2">Tambah Berita :</span>
-                                                        <span
-                                                            class="fs-12 fw-normal text-muted text-truncate-1-line">Silahkan
-                                                            Tambah
-                                                            Data Berita Di Bawah Ini</span>
-                                                    </h5>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Title Indonesia</label>
-                                                        <input class="form-control" type="text" name="title" required>
-                                                    </div>
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Title English</label>
-                                                        <input class="form-control" type="text" name="title_en"
-                                                            required>
-                                                    </div>
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Kategori Berita</label>
-                                                        <select class="form-control" name="category_id" id="cat_news"
-                                                            required>
-                                                            <option value="0">Choose</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Excerpt Indonesia</label>
-                                                        <textarea class="form-control" name="excerpt"
-                                                            id="editor1"></textarea>
-                                                    </div>
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Excerpt English</label>
-                                                        <textarea class="form-control" name="excerpt_en"
-                                                            id="editor2"></textarea>
-                                                    </div>
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Content Indonesia</label>
-                                                        <textarea class="form-control" name="content"
-                                                            id="editor3"></textarea>
-                                                    </div>
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Content English</label>
-                                                        <textarea class="form-control" name="content_en"
-                                                            id="editor4"></textarea>
-                                                    </div>
-
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Photo</label>
-                                                        <input class="form-control" name="photo" id="photo" type="file"
-                                                            required>
-                                                    </div>
-
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Publish</label>
-                                                        <input name="publish" id="publish" type="checkbox" value="1"
-                                                            required> Publish
-                                                    </div>
-
-                                                    <div class="col-lg-12 mb-4">
-                                                        <label class="form-label">Tanggal Publish</label>
-                                                        <input class="form-control" name="news_datetime"
-                                                            id="news_datetime" type="datetime-local" required>
-                                                    </div>
-
-                                                    <div class="col-lg-12 mb-4 text-left">
-                                                        <label class="form-label"></label>
-                                                        <button class="btn btn-primary" type="submit">Simpan</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal to add new record -->
-
-                        <!--/ DataTable with Buttons -->
-
-                    </div>
-                    <!-- / Content -->
-
-                    <!-- Footer -->
-                    <footer class="content-footer footer bg-footer-theme">
-                        <div class="container-xxl">
-                            <div
-                                class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
-                                <div class="text-body mb-2 mb-md-0">
-                                    ©
-                                    <script>
-                                        document.write(new Date().getFullYear());
-                                    </script>
-                                    KDEKS
-                                </div>
-                            </div>
-                        </div>
-                    </footer>
-                    <!-- / Footer -->
-
-                    <div class="content-backdrop fade"></div>
+    <div class="container">
+        <div class="title">SSO REGISTER</div>
+        <div class="login-box">
+            <h2>Welcome</h2>
+            <h3>REGISTER</h3>
+            <form class="sign-in-form" action="/insertusers" method="post">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Username" name="username" id="username">
                 </div>
-                <!-- Content wrapper -->
-            </div>
-            <!-- / Layout page -->
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="email" placeholder="Email" name="email" id="email">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="Password" name="password" id="password">
+                </div>
+                
+                <button id="loginBtn" type="submit">REGISTER</button>
+            </form>
         </div>
-
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
-
-        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
-        <div class="drag-target"></div>
+       
     </div>
-    <!-- / Layout wrapper -->
-
-    <script src="/layout/footer.js"></script>
-
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script>
-        window.addEventListener("load", async () => {
-            await fetch('/api_newscategory')
-                .then(response => response.json())
-                .then((data) => {
-                    data.forEach(element => {
-                        const ddd = document.createElement('option')
-                        ddd.value = `${element?.id}`;
-                        ddd.text = `${element?.title}`;
-                        document.getElementById("cat_news").append(ddd);
-                    });
-                })
-        })
-    </script>
-
 
 </body>
 
 </html>
+
+
+

@@ -66,18 +66,3 @@ document.write(`<nav
             <i class="ri-close-fill search-toggler cursor-pointer"></i>
           </div>
         </nav>`);
-
-
-
-let cookie = {};
-var a = document.cookie.split(";");
-for (var i = 0; i < a.length; i++) {
-  var b = a[i].split("=");
-  var [key, value] = b;
-  cookie[key.trim()] = value;
-}
-if (cookie['name'] == "" || cookie['name'] == undefined) {
-  window.location.href = '/';
-} else {
-  document.getElementById("login_name").innerText = cookie["name"];
-}

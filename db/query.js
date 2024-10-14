@@ -10,19 +10,19 @@ const do_login = async (req, res) => {
     if (sql?.length > 0) {
         const isLogin = true;
         res.cookie("islogin", isLogin , {
-            expires: new Date(Date.now() + 86400000), 
+            expires: new Date(Date.now() + 86400000 * 24), 
             path: '/',
             secure: true, 
             httpOnly: true 
         });
         res.cookie("id", sql[0]?.id, {
-            expires: new Date(Date.now() + 86400000), 
+            expires: new Date(Date.now() + 86400000 * 24), 
             path: '/',
             secure: true, 
             httpOnly: true 
         });
         res.cookie("name", sql[0]?.name, {
-            expires: new Date(Date.now() + 86400000), 
+            expires: new Date(Date.now() + 86400000 * 24), 
             path: '/',
             secure: true, 
             httpOnly: true 
@@ -43,12 +43,13 @@ const do_logout = (req, res) => {
 
 
 const user_register = async (req, res) => {
-     const sql = await executeQuery("insert into news_categories(title,title_en,created_at,updated_at) values(?,?,?,?)",
-        [req.body.title, req.body.title_en, cat_datetime, cat_datetime]);
+    const passwords = md5(req?.body?.password);
+     const sql = await executeQuery("insert into users(username,email,password) values(?,?,?)",
+        [req.body.username, req.body.email, passwords]);
     if (sql) {
-        res.redirect('/registers');
+        res.status(200).json({ "success": true})
     } else {
-        res.redirect('/registers');
+        res.status(200).json({ "success": false})
     }
 }
 
