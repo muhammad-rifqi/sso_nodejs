@@ -1,8 +1,6 @@
 const md5 = require('md5');
 const { executeQuery } = require('./config');
-
 //::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 const do_login = async (req, res) => {
     const email = req?.body?.email;
     const uri = req.body.url;
@@ -19,6 +17,9 @@ const do_login = async (req, res) => {
         res.cookie("name", sql[0]?.name, {
             expires: new Date(Date.now() + 86400000 * 24)
         });
+        res.cookie("roles_id", sql[0]?.roles_id, {
+            expires: new Date(Date.now() + 86400000 * 24)
+        });
         res.redirect(uri+'/dashboard');
     } else {
         res.status(200).json({ "success": false })
@@ -27,30 +28,30 @@ const do_login = async (req, res) => {
 }
 
 const do_logout = (req, res) => {
+    
+    const uri_local = "http://localhost:3005";
+    const uri_dev = "http://sso.rifhandi.com";
+
     res.clearCookie("islogin");
     res.clearCookie("name");
     res.clearCookie("id");
-    res.redirect('http://localhost:3005/login');
+    res.clearCookie("roles_id");
+    res.redirect(uri_dev+'/login');
 }
-
 
 const user_register = async (req, res) => {
     const passwords = md5(req?.body?.password);
      const sql = await executeQuery("insert into users(name,email,password) values(?,?,?)",
         [req.body.username, req.body.email, passwords]);
     if (sql) {
-        res.status(200).json({ "success": true})
+        res.redirect('/register');
     } else {
-        res.status(200).json({ "success": false})
+        res.redirect('/register');
     }
 }
 
-
-
 //::::::::::::::::::::::::::::::End Of Login :::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
-
 module.exports = {
     do_login,
     do_logout,
