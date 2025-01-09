@@ -1,26 +1,39 @@
 const md5 = require('md5');
-const { executeQuery } = require('./config');
+const { executeQuery } = require('./postgres');
 //::::::::::::::::::::::::::::::Start Of LOGIN LOGOUT :::::::::::::::::::::::::::::::::::::::::::::::::::::
 const do_login = async (req, res) => {
     const email = req?.body?.email;
     const uri = req.body.url;
     const password = md5(req?.body?.password);
-    const sql = await executeQuery('SELECT * FROM users where email = ? AND password = ? ', [email, password])
+    const sql = await executeQuery("SELECT * FROM users where email = $1 AND password =$2 AND approve = 'Y'", [email, password])
     if (sql?.length > 0) {
         const isLogin = true;
-        res.cookie("islogin", isLogin , {
-            expires: new Date(Date.now() + 86400000 * 24)
+        res.cookie("islogin", isLogin, {
+            expires: new Date(Date.now() + 86400000 * 24),
+            httpOnly: false,
         });
         res.cookie("id", sql[0]?.id, {
-            expires: new Date(Date.now() + 86400000 * 24)
+            expires: new Date(Date.now() + 86400000 * 24),
+            httpOnly: false,
         });
         res.cookie("name", sql[0]?.name, {
-            expires: new Date(Date.now() + 86400000 * 24)
+            expires: new Date(Date.now() + 86400000 * 24),
+            httpOnly: false,
         });
         res.cookie("roles_id", sql[0]?.roles_id, {
-            expires: new Date(Date.now() + 86400000 * 24)
+            expires: new Date(Date.now() + 86400000 * 24),
+            httpOnly: false,
         });
-        res.redirect(uri+'/dashboard');
+        res.cookie("id_province", sql[0]?.id_province, {
+            expires: new Date(Date.now() + 86400000 * 24),
+            httpOnly: false,
+        });
+        res.cookie("directorat_id", sql[0]?.directorat_id, {
+            expires: new Date(Date.now() + 86400000 * 24),
+            httpOnly: false,
+        });
+
+        res.redirect(uri + '/dashboard');
     } else {
         res.status(200).json({ "success": false })
     }
@@ -28,7 +41,7 @@ const do_login = async (req, res) => {
 }
 
 const do_logout = (req, res) => {
-    
+
     const uri_local = "http://localhost:3005";
     const uri_dev = "http://sso.rifhandi.com";
 
@@ -36,25 +49,15 @@ const do_logout = (req, res) => {
     res.clearCookie("name");
     res.clearCookie("id");
     res.clearCookie("roles_id");
-    res.redirect(uri_dev+'/login');
-}
-
-const user_register = async (req, res) => {
-    const passwords = md5(req?.body?.password);
-     const sql = await executeQuery("insert into users(name,email,password) values(?,?,?)",
-        [req.body.username, req.body.email, passwords]);
-    if (sql) {
-        res.redirect('/register');
-    } else {
-        res.redirect('/register');
-    }
+    res.clearCookie("id_province");
+    res.clearCookie("directorat_id");
+    res.redirect(uri_dev + '/login');
 }
 
 //::::::::::::::::::::::::::::::End Of Login :::::::::::::::::::::::::::::::::::::::::::::::::::::
 //::::::::::::::::::::::::::::::Start Of Modules:::::::::::::::::::::::::::::::::::::::::::::::::::::
 module.exports = {
     do_login,
-    do_logout,
-    user_register
+    do_logout
 }
 //::::::::::::::::::::::::::::::End Of Module:::::::::::::::::::::::::::::::::::::::::::::::::::::
