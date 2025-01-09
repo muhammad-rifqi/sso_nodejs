@@ -5,7 +5,7 @@ const do_login = async (req, res) => {
     const email = req?.body?.email;
     const uri = req.body.url;
     const password = md5(req?.body?.password);
-    const sql = await executeQuery("SELECT * FROM users where email = $1 AND password =$2 AND approve = 'Y'", [email, password])
+    const sql = await executeQuery("SELECT * FROM users where email = $1 AND password =$2 AND users.approve = 'Y' ", [email, password])
     if (sql?.length > 0) {
         const isLogin = true;
         res.cookie("islogin", isLogin, {
