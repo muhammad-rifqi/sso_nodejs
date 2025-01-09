@@ -9,28 +9,22 @@ const do_login = async (req, res) => {
     if (sql?.length > 0) {
         const isLogin = true;
         res.cookie("islogin", isLogin, {
-            expires: new Date(Date.now() + 86400000 * 24),
-            httpOnly: false,
+            expires: new Date(Date.now() + 86400000 * 24)
         });
         res.cookie("id", sql[0]?.id, {
-            expires: new Date(Date.now() + 86400000 * 24),
-            httpOnly: false,
+            expires: new Date(Date.now() + 86400000 * 24)
         });
         res.cookie("name", sql[0]?.name, {
-            expires: new Date(Date.now() + 86400000 * 24),
-            httpOnly: false,
+            expires: new Date(Date.now() + 86400000 * 24)
         });
         res.cookie("roles_id", sql[0]?.roles_id, {
-            expires: new Date(Date.now() + 86400000 * 24),
-            httpOnly: false,
+            expires: new Date(Date.now() + 86400000 * 24)
         });
         res.cookie("id_province", sql[0]?.id_province, {
-            expires: new Date(Date.now() + 86400000 * 24),
-            httpOnly: false,
+            expires: new Date(Date.now() + 86400000 * 24)
         });
         res.cookie("directorat_id", sql[0]?.directorat_id, {
-            expires: new Date(Date.now() + 86400000 * 24),
-            httpOnly: false,
+            expires: new Date(Date.now() + 86400000 * 24)
         });
 
         res.redirect(uri + '/dashboard');
