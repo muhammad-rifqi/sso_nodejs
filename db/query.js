@@ -17,7 +17,7 @@ const do_login = async (req, res) => {
         res.cookie("name", sql[0]?.name, {
             expires: new Date(Date.now() + 86400000 * 24)
         });
-        res.cookie("roles_id", sql[0]?.roles_id, {
+        res.cookie("roles_id", sql[0]?.role_id, {
             expires: new Date(Date.now() + 86400000 * 24)
         });
         res.cookie("id_province", sql[0]?.id_province, {
