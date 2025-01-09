@@ -27,7 +27,7 @@ const do_login = async (req, res) => {
             expires: new Date(Date.now() + 86400000 * 24)
         });
 
-        res.redirect(uri + '/dashboard');
+        // res.redirect(uri + '/dashboard');
     } else {
         res.status(200).json({ "success": false })
     }
