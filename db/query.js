@@ -26,7 +26,7 @@ const do_login = async (req, res) => {
         res.cookie("directorat_id", sql[0]?.directorat_id, {
             expires: new Date(Date.now() + 86400000 * 24)
         });
-
+        console.log(sql)
         // res.redirect(uri + '/dashboard');
     } else {
         res.status(200).json({ "success": false })
