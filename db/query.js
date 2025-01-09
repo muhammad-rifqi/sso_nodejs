@@ -9,22 +9,46 @@ const do_login = async (req, res) => {
     if (sql?.length > 0) {
         const isLogin = true;
         res.cookie("islogin", isLogin, {
-            expires: new Date(Date.now() + 86400000 * 24)
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.rifhandi.com', 
+            secure: true,        
+            httpOnly: false,     
+            sameSite: 'None',    
         });
         res.cookie("id", sql[0]?.id, {
-            expires: new Date(Date.now() + 86400000 * 24)
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.rifhandi.com', 
+            secure: true,        
+            httpOnly: false,     
+            sameSite: 'None',  
         });
         res.cookie("name", sql[0]?.name, {
-            expires: new Date(Date.now() + 86400000 * 24)
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.rifhandi.com', 
+            secure: true,        
+            httpOnly: false,     
+            sameSite: 'None',  
         });
         res.cookie("roles_id", sql[0]?.role_id, {
-            expires: new Date(Date.now() + 86400000 * 24)
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.rifhandi.com', 
+            secure: true,        
+            httpOnly: false,     
+            sameSite: 'None',  
         });
         res.cookie("id_province", sql[0]?.id_province, {
-            expires: new Date(Date.now() + 86400000 * 24)
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.rifhandi.com', 
+            secure: true,        
+            httpOnly: false,     
+            sameSite: 'None',  
         });
         res.cookie("directorat_id", sql[0]?.directorat_id, {
-            expires: new Date(Date.now() + 86400000 * 24)
+            expires: new Date(Date.now() + 86400000 * 24),
+            domain: '.rifhandi.com', 
+            secure: true,        
+            httpOnly: false,     
+            sameSite: 'None',  
         });
         res.redirect(uri + '/dashboard');
     } else {
