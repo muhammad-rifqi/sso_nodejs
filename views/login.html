@@ -155,7 +155,8 @@
         <div class="login-box">
             <h2>Welcome</h2>
             <h3>Login</h3>
-            <form class="sign-in-form" action="/act_login" method="post">
+            <!-- <form class="sign-in-form" action="/act_login" method="post"> -->
+            <form class="sign-in-form" onsubmit="cekLogin(); return false;">
                 <input type="hidden" id="urls" name="url" value="">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
@@ -173,9 +174,59 @@
     </div>
 
 </body>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    const uri = new URL(window.location.href);
-    document.getElementById("urls").value = uri?.searchParams.get('from');
+    window.addEventListener("load", async () => {
+        await getURLPATH();
+    })
+
+    function getURLPATH() {
+        const uri = new URL(window.location.href);
+        document.getElementById("urls").value = uri?.searchParams.get('from');
+    }
+
+    function cekLogin() {
+        const email = document.getElementById("email").value;
+        const url = document.getElementById("urls").value;
+        try {
+            fetch('/act_login', {
+                method: "POST",
+                headers: { "Access-Control-Allow-Origin": "*", "Content-type": "application/json" },
+                body: JSON.stringify({ email: email, url: url }),
+            })
+                .then(response => response.json())
+                .then((data) => {
+                    console.log(data)
+                    if (data?.success) {
+                        swal({
+                            title: "SSO Succes",
+                            text: "Anda Sudah Bisa Masuk Ke Dashboard Aplikasi!",
+                            icon: "success",
+                        }).then(function () {
+                            window.location.href = `${data?.callback}`;
+                        });
+                    } else {
+                        swal({
+                            title: "Login Failed",
+                            text: "Failed!",
+                            icon: "error",
+                        }).then(function () {
+                            window.location.reload();
+                        });
+                    }
+                })
+        } catch (error) {
+            swal({
+                title: "Login Failed",
+                text: error.message,
+                icon: "error",
+            }).then(function () {
+                window.location.reload();
+            });
+        }
+
+    }
+
 </script>
 
 </html>
