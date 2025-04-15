@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const port = process.env.PORT;
 const path = require('path');
 const cookieParser = require("cookie-parser");
-const db = require('./db/query');
+// const db = require('./db/query');
 
 apps.use(cookieParser());
 apps.use(bodyParser.json())
@@ -26,8 +26,8 @@ apps.get('/login', (req, res) => {
     res.sendFile(path.resolve('./views/login.html'));
 })
 
-apps.post('/act_login', db.do_login);
+// apps.post('/act_login', db.do_login);
 
-apps.get("/logout", db.do_logout);
+// apps.get("/logout", db.do_logout);
 
-apps.listen(3005);
+apps.listen(13090);
