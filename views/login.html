@@ -189,7 +189,7 @@
         const email = document.getElementById("email").value;
         const url = document.getElementById("urls").value;
         try {
-            fetch('/act_login', {
+            fetch('http://cms-dev.kneks.go.id/act_login', {
                 method: "POST",
                 headers: { "Access-Control-Allow-Origin": "*", "Content-type": "application/json" },
                 body: JSON.stringify({ email: email, url: url }),
